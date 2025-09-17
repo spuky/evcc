@@ -18,6 +18,7 @@ const (
 	Rtu
 	Ascii
 	Udp
+	SolarmanV5
 
 	CoilOn uint16 = 0xFF00
 )
@@ -39,11 +40,15 @@ type Settings struct {
 	Baudrate            int    `json:",omitempty" yaml:",omitempty"`
 	UDP                 bool   `json:",omitempty" yaml:",omitempty"`
 	RTU                 *bool  `json:",omitempty" yaml:",omitempty"`
+	SolarmanV5          *bool  `json:",omitempty" yaml:",omitempty"`
+	LoggerSerial        uint32 `json:",omitempty" yaml:",omitempty"`
 }
 
 // Protocol identifies the wire format from the RTU setting
 func (s Settings) Protocol() Protocol {
 	switch {
+	case s.SolarmanV5 != nil && *s.SolarmanV5:
+		return SolarmanV5
 	case s.UDP:
 		return Udp
 	case s.Device != "" || s.RTU != nil && *s.RTU:
@@ -142,6 +147,23 @@ func NewConnection(ctx context.Context, uri, device, comset string, baudrate int
 }
 
 func physicalConnection(ctx context.Context, proto Protocol, cfg Settings) (*meterConnection, error) {
+	if proto == SolarmanV5 {
+		if cfg.URI == "" {
+			return nil, errors.New("invalid SolarmanV5 configuration: URI is required")
+		}
+		if cfg.LoggerSerial == 0 {
+			return nil, errors.New("invalid SolarmanV5 configuration: LoggerSerial is required")
+		}
+
+		uri := util.DefaultPort(cfg.URI, 8899)
+		conn, err := NewSolarmanV5Connection(uri, cfg.LoggerSerial)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create SolarmanV5 connection: %w", err)
+		}
+
+		return registeredConnection(ctx, uri, proto, conn)
+	}
+
 	if (cfg.Device != "") == (cfg.URI != "") {
 		return nil, errors.New("invalid modbus configuration: must have either uri or device")
 	}
