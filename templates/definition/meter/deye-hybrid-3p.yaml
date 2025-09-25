@@ -17,6 +17,9 @@ params:
     baudrate: 9600
     id: 1
   - name: loggerserial
+    description:
+      de: Logger-Seriennummer
+      en: Logger serial number
   - name: capacity
     advanced: true
   - name: minsoc
