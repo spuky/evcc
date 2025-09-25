@@ -17,13 +17,15 @@ const (
 
 	HemsTypeSMA = "sma"
 
-	ModbusChoiceRS485    = "rs485"
-	ModbusChoiceTCPIP    = "tcpip"
-	ModbusChoiceUDP      = "udp"
-	ModbusKeyRS485Serial = "rs485serial"
-	ModbusKeyRS485TCPIP  = "rs485tcpip"
-	ModbusKeyTCPIP       = "tcpip"
-	ModbusKeyUDP         = "udp"
+	ModbusChoiceRS485     = "rs485"
+	ModbusChoiceTCPIP     = "tcpip"
+	ModbusChoiceUDP       = "udp"
+	ModbusChoiceSolarmanV5 = "solarmanv5"
+	ModbusKeyRS485Serial  = "rs485serial"
+	ModbusKeyRS485TCPIP   = "rs485tcpip"
+	ModbusKeyTCPIP        = "tcpip"
+	ModbusKeyUDP          = "udp"
+	ModbusKeySolarmanV5   = "solarmanv5"
 
 	ModbusParamNameId       = "id"
 	ModbusParamNameDevice   = "device"
@@ -41,7 +43,7 @@ const (
 	RenderModeInstance
 )
 
-var ValidModbusChoices = []string{ModbusChoiceRS485, ModbusChoiceTCPIP, ModbusChoiceUDP}
+var ValidModbusChoices = []string{ModbusChoiceRS485, ModbusChoiceTCPIP, ModbusChoiceUDP, ModbusChoiceSolarmanV5}
 
 const (
 	CapabilityISO151182      = "iso151182"       // ISO 15118-2 support

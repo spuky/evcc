@@ -27,7 +27,7 @@ export type TemplateParam = {
   Usages?: TemplateType[];
 };
 
-export type ModbusCapability = "rs485" | "tcpip";
+export type ModbusCapability = "rs485" | "tcpip" | "solarmanv5";
 
 export type ModbusParam = TemplateParam & {
   ID?: string;

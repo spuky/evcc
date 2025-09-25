@@ -13,7 +13,7 @@ params:
     choice: ["grid", "pv", "battery"]
     allinone: true
   - name: modbus
-    choice: ["rs485", "tcpip"]
+    choice: ["rs485", "tcpip", "solarmanv5"]
     baudrate: 9600
     id: 1
   - name: capacity

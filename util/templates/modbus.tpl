@@ -18,6 +18,11 @@ rtu: false
 uri: {{ .host }}:{{ if (ne .port "502") }}{{ .port }}{{ else }}8899{{ end }}
 udp: true
 rtu: true
+{{- else if or (eq .modbus "solarmanv5") .solarmanv5 }}
+# SolarmanV5
+uri: {{ .host }}:{{ if (ne .port "8899") }}{{ .port }}{{ else }}8899{{ end }}
+solarmanv5: true
+loggerserial: {{ .loggerserial }}
 {{- else }}
 # configuration error - should not happen
 modbusConnectionTypeNotDefined: {{ .modbus }}

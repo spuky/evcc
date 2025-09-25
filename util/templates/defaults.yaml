@@ -697,6 +697,7 @@ modbus:
     rs485: ["rs485serial", "rs485tcpip"]
     tcpip: ["tcpip"]
     udp: ["udp"]
+    solarmanv5: ["solarmanv5"]
   types:
     rs485serial:
       description:
@@ -750,6 +751,27 @@ modbus:
         - reference: true
           name: port
           default: 502
+    solarmanv5:
+      description:
+        generic: SolarmanV5
+      params:
+        - reference: true
+          referencename: modbusid
+          name: id
+        - reference: true
+          name: host
+        - reference: true
+          name: port
+          default: 8899
+        - name: loggerserial
+          type: int
+          required: true
+          description:
+            en: Logger serial number
+            de: Logger Seriennummer
+          help:
+            en: Serial number of the data logger (required for SolarmanV5)
+            de: Seriennummer des Datenloggers (erforderlich für SolarmanV5)
 
 devicegroups:
   generic:
