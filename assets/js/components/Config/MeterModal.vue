@@ -81,6 +81,7 @@
 						v-model:device="values.device"
 						v-model:baudrate="values.baudrate"
 						v-model:comset="values.comset"
+						v-model:loggerserial="values.loggerserial"
 						:defaultId="modbus.ID ? Number(modbus.ID) : undefined"
 						:defaultComset="modbus.Comset"
 						:defaultBaudrate="modbus.Baudrate"
